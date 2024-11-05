@@ -1,0 +1,7 @@
+.eslintrc.cjs
+.prettierrc.cjs
+
+*.config.js
+*.config.ts
+
+src/**/*.js
