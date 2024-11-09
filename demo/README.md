@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# Layer Design System - Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 소개
 
-Currently, two official plugins are available:
+- 프로젝트 개요
+- 기술 스택 (React + TypeScript + Vite)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 시작하기
 
-## Expanding the ESLint configuration
+- 설치 방법
+- 개발 환경 설정
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 빌드 설정
 
-- Configure the top-level `parserOptions` property like this:
+- 빌드 프로세스 설명
+- 환경 변수 설정
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Storybook
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Storybook 설정 방법
+- 스토리 작성 가이드
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 개발 가이드라인
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- 컴포넌트 개발 프로세스
+- 코드 스타일 가이드

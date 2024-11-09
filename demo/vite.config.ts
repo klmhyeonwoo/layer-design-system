@@ -7,7 +7,11 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@layer-ui/button": path.resolve(__dirname, "../packages/ui/button/src"),
+      "@layer-ui": path.resolve(__dirname, "../packages/ui"),
     },
+  },
+  build: {
+    sourcemap: true,
+    target: "es2022",
   },
 });
