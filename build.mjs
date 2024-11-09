@@ -21,7 +21,6 @@ async function build(path) {
       },
       ssr: true,
       outDir: dist,
-      rollupOptions: {},
     },
     plugins: [
       dts({

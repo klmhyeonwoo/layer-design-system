@@ -4,8 +4,8 @@ export default defineConfig({
     sourcemap: true,
     target: "es2022",
     minify: "esbuild",
-  },
-  resolve: {
-    preserveSymlinks: true,
+    rollupOptions: {
+      external: [/@layer-lib\/.+/, /@layer-ui\/.+/],
+    },
   },
 });

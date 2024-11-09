@@ -10,6 +10,9 @@
     "lib": ["DOM", "ESNext", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+
+    "emitDeclarationOnly": true,
 
     "moduleResolution": "Bundler",
     "isolatedModules": true,
@@ -18,14 +21,14 @@
     "jsx": "react-jsx",
     "pretty": true,
     "resolveJsonModule": true,
-
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@layer-ui/button": ["./packages/ui/button/src"]
+      "@layer-ui/button": ["./packages/ui/button/src"],
+      "@layer-lib/use-mounted": ["./packages/lib/use-mounted/src"]
     }
   },
-  "include": ["lib", "packages"]
+  "include": ["demo", "packages", "ssr"]
 }
