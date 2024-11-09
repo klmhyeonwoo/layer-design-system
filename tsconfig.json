@@ -12,10 +12,8 @@
     "skipLibCheck": true,
 
     "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "emitDeclarationOnly": true,
     "declaration": true,
     "jsx": "react-jsx",
     "pretty": true,
