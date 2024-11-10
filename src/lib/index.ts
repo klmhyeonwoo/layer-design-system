@@ -1,1 +1,2 @@
-export { default as TestComponent } from './src/components/TestComponent.tsx';
+export { Button } from "./src/components/Button";
+export { Input } from "./src/components/Input";

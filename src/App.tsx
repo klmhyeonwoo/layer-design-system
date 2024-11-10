@@ -1,10 +1,10 @@
-import { TestComponent } from "@layer/lib";
+import { Button } from "@layer/lib";
 
 function App() {
   return (
     <div>
+      <Button />
       <span> Its works! </span>
-      <TestComponent />
     </div>
   );
 }
