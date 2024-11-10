@@ -1,3 +1,2 @@
-import * as React from "react";
-
-export const useBrowserLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : () => {};
+"use client";
+export { useBrowserLayoutEffect } from "./use-browser-layout-effect";

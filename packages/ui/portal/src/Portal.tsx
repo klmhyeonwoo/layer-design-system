@@ -1,5 +1,16 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Slot } from "@radix-ui/react-slot";
+import { useMounted } from "@layer-lib/react-use-mounted";
+
+const PortalPrimitive = React.forwardRef((props: React.ComponentPropsWithRef<"div"> & { asChild?: boolean }, forwardedRef: any) => {
+  const { asChild, ...portalProps } = props;
+  const Component = asChild ? Slot : "div";
+
+  return <Component {...portalProps} ref={forwardedRef} />;
+});
+
+PortalPrimitive.displayName = "PortalPrimitive";
 
 interface PortalProps extends React.ComponentProps<"div"> {
   container?: Element | DocumentFragment | null;
@@ -7,10 +18,10 @@ interface PortalProps extends React.ComponentProps<"div"> {
 
 const Portal = React.forwardRef<HTMLDivElement, PortalProps>((props, forwardedRef) => {
   const { container: containerProp, ...portalProps } = props;
-  const [mounted, setMounted] = React.useState(false);
-  React.useLayoutEffect(() => setMounted(true), []);
+  const mounted = useMounted();
+
   const container = containerProp || (mounted && globalThis?.document?.body);
-  return container ? ReactDOM.createPortal(<div {...portalProps} ref={forwardedRef} />, container) : null;
+  return container ? ReactDOM.createPortal(<PortalPrimitive asChild {...portalProps} ref={forwardedRef} />, container) : null;
 });
 
 export { Portal };

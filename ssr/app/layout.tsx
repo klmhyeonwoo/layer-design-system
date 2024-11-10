@@ -19,6 +19,9 @@ export default function RootLayout({
             <Link style={{ border: "1px solid black", borderRadius: "0.5em", padding: "0.2em 1em", backgroundColor: "#cccccc" }} href="/button">
               Button
             </Link>
+            <Link style={{ border: "1px solid black", borderRadius: "0.5em", padding: "0.2em 1em", backgroundColor: "#cccccc" }} href="/modal">
+              Modal
+            </Link>
           </div>
           <main style={{ flex: 1 }}>{children}</main>
         </div>

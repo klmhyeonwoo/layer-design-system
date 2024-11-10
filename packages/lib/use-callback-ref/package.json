@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/react-use-escape-key-down",
+  "name": "@layer-lib/react-use-callback-ref",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
@@ -26,9 +26,6 @@
   "scripts": {
     "clean": "rm -rf dist",
     "version": "yarn version"
-  },
-  "dependencies": {
-    "@layer-lib/react-use-callback-ref": "workspace:*"
   },
   "peerDependencies": {
     "@types/react": "*",

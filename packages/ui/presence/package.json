@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/react-use-escape-key-down",
+  "name": "@layer-ui/presence",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
@@ -25,10 +25,10 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "version": "yarn version"
+    "version": "pnpm version"
   },
   "dependencies": {
-    "@layer-lib/react-use-callback-ref": "workspace:*"
+    "@layer-lib/react-use-composed-ref": "workspace:*"
   },
   "peerDependencies": {
     "@types/react": "*",
@@ -36,6 +36,9 @@
   },
   "peerDependenciesMeta": {
     "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
       "optional": true
     }
   },
