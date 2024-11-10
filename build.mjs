@@ -14,7 +14,7 @@ async function build(path) {
     build: {
       lib: {
         entry: file,
-        formats: ["es", "cjs"],
+        formats: ["cjs", "es"],
         fileName: (format) => {
           return format === "es" ? "index.mjs" : "index.js";
         },
@@ -38,8 +38,7 @@ async function build(path) {
     dts: { only: true },
     outDir: dist,
     silent: true,
-    external: [/@layer-ui\/.+/],
-    tsconfig: "./tsconfig.json",
+    external: [/@layer-lib\/.+/, /@layer-ui\/.+/],
   });
 
   console.log(`Built ${path}/dist with Vite`);
