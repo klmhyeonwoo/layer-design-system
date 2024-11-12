@@ -1,2 +1,2 @@
 "use client";
-export { ModalTrigger, Modal, ModalContent } from "./Modal";
+export { ModalTrigger, Modal, ModalContent, ModalOverlay, ModalPortal } from "./Modal";

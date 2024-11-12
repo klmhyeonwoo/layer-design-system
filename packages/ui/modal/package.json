@@ -30,8 +30,10 @@
   "dependencies": {
     "@layer-lib/react-context": "workspace:*",
     "@layer-lib/react-use-composed-ref": "workspace:*",
+    "@layer-ui/portal": "workspace:*",
     "@layer-ui/presence": "workspace:*",
-    "@layer-ui/portal": "workspace:*"
+    "@radix-ui/react-slot": "^1.1.0",
+    "react-remove-scroll": "^2.6.0"
   },
   "peerDependencies": {
     "@types/react": "*",

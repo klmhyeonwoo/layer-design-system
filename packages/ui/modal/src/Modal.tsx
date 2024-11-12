@@ -1,4 +1,7 @@
 import * as React from "react";
+import { RemoveScroll } from "react-remove-scroll";
+import { Slot } from "@radix-ui/react-slot";
+
 import { createContext } from "@layer-lib/react-context";
 import { Portal } from "@layer-ui/portal";
 import { Presence } from "@layer-ui/presence";
@@ -100,14 +103,33 @@ const ModalContentInner = React.forwardRef<HTMLDivElement, React.ComponentPropsW
       aria-describedby={context.descriptionId}
       aria-labelledby={context.titleId}
       data-state={getState(context.open)}
-      className={"rt-BaseDialogContent rt-DialogContent"}
     />
   );
 });
 
-interface DialogPortalProps extends React.ComponentPropsWithoutRef<"div"> {}
+ModalContentInner.displayName = "ModalContentInner";
 
-const DialogPortal = ({ children, ...portalProps }: DialogPortalProps) => {
+interface ModalContentProps extends React.ComponentPropsWithoutRef<"div"> {}
+
+const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(({ ...contentProps }, forwardedRef) => {
+  const context = useModalContext();
+
+  return context.modal ? (
+    <ModalPortal>
+      <ModalContentInner {...contentProps} ref={forwardedRef} />
+    </ModalPortal>
+  ) : (
+    <Presence present={context.open}>
+      <ModalContentInner {...contentProps} ref={forwardedRef} />
+    </Presence>
+  );
+});
+
+ModalContent.displayName = "ModalContent";
+
+interface ModalPortalProps extends React.ComponentPropsWithoutRef<"div"> {}
+
+const ModalPortal = ({ children, ...portalProps }: ModalPortalProps) => {
   const context = useModalContext();
   return React.Children.map(children, (child) => (
     <Presence present={context.open}>
@@ -116,24 +138,46 @@ const DialogPortal = ({ children, ...portalProps }: DialogPortalProps) => {
   ));
 };
 
-DialogPortal.displayName = "DialogPortal";
+ModalPortal.displayName = "ModalPortal";
 
-interface ModalContentProps extends React.ComponentPropsWithoutRef<"div"> {}
+interface ModalOverlayInnerProps extends React.ComponentPropsWithoutRef<"div"> {}
 
-const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(({ ...contentProps }, forwardedRef) => {
+const ModalOverlayInner = React.forwardRef<HTMLDivElement, ModalOverlayInnerProps>(({ ...overlayProps }, forwardedRef) => {
   const context = useModalContext();
-
-  return context.modal ? (
-    <DialogPortal>
-      <ModalContentInner {...contentProps} ref={forwardedRef} />
-    </DialogPortal>
-  ) : (
-    <Presence present={context.open}>
-      <ModalContentInner {...contentProps} ref={forwardedRef} />
-    </Presence>
+  return (
+    <RemoveScroll as={Slot} allowPinchZoom shards={[context.contentRef]}>
+      <div
+        {...overlayProps}
+        ref={forwardedRef}
+        data-state={getState(context.open)}
+        style={{ pointerEvents: "auto", ...overlayProps.style }}
+        onClick={composeEventHandlers(context.onOpenToggle, overlayProps.onClick ?? (() => {}))}
+      />
+    </RemoveScroll>
   );
 });
 
+ModalOverlayInner.displayName = "ModalOverlayInner";
+
+interface ModalOverlayProps extends React.ComponentPropsWithoutRef<"div"> {}
+
+const ModalOverlay = React.forwardRef<HTMLDivElement, ModalOverlayProps>(({ ...overlayProps }, forwardedRef) => {
+  const context = useModalContext();
+  return context.modal ? (
+    <Presence present={context.open}>
+      <ModalOverlayInner {...overlayProps} ref={forwardedRef} />
+    </Presence>
+  ) : null;
+});
+
+ModalOverlay.displayName = "ModalOverlay";
+
+/**
+ * @TODO 이벤트 핸들러 컴포지션 함수 분리
+ * @param originalHandler
+ * @param handlers
+ * @returns
+ */
 function composeEventHandlers<E>(originalHandler?: (event: E) => void, ...handlers: ((event: E) => void)[]) {
   return function handleEvent(event: E) {
     originalHandler?.(event);
@@ -147,4 +191,4 @@ function composeEventHandlers<E>(originalHandler?: (event: E) => void, ...handle
 
 ModalContent.displayName = "ModalContent";
 
-export { Modal, ModalTrigger, ModalContent };
+export { Modal, ModalTrigger, ModalContent, ModalPortal, ModalOverlay };

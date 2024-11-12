@@ -9,11 +9,11 @@ const Presence = (props: PresenceProps) => {
   const { present, children } = props;
   const { isPresent, ref: PresentRef } = usePresence(present);
   const child = typeof children === "function" ? children({ present }) : React.Children.only(children);
-
   const ref = useComposedRef(PresentRef, getElementRef(child));
-
   return isPresent ? React.cloneElement(child, { ref }) : null;
 };
+
+type AnimationState = "closed" | "opening" | "open" | "closing";
 
 /**
  * @TODO 애니메이션 상태에 따라 마운트 상태 변경하기
@@ -22,12 +22,51 @@ const Presence = (props: PresenceProps) => {
  * @returns
  */
 function usePresence(present: boolean) {
-  const [_, setNode] = React.useState<HTMLElement>();
-  const stylesRef = React.useRef<CSSStyleDeclaration>({} as any);
-  console.log(stylesRef.current.animationName);
+  const prevPresentRef = React.useRef(present);
+  const prevAnimationNameRef = React.useRef<string>("none");
 
+  const initialAnimationState = present ? "open" : "closed";
+
+  const [isPresent, setIsPresent] = React.useState<AnimationState>(initialAnimationState);
+  const [node, setNode] = React.useState<HTMLElement>();
+  const stylesRef = React.useRef<CSSStyleDeclaration>({} as any);
+
+  React.useLayoutEffect(() => {
+    const wasPresent = prevPresentRef.current;
+    const hasPresentChanged = wasPresent !== present;
+
+    if (hasPresentChanged) {
+      if (present) {
+        setIsPresent("opening");
+        // 애니메이션이 없는 경우 강제 닫기
+      } else if (stylesRef.current.animationName === "none" || stylesRef.current.display === "none") {
+        setIsPresent("closed");
+      } else {
+        setIsPresent("closing");
+      }
+
+      prevPresentRef.current = present;
+    }
+  }, [present]);
+
+  React.useLayoutEffect(() => {
+    if (node) {
+      const handleAnimationStart = () => {
+        prevAnimationNameRef.current = stylesRef.current.animationName;
+      };
+      const handleAnimationEnd = () => {
+        setIsPresent(prevPresentRef.current ? "open" : "closed");
+      };
+      node.addEventListener("animationstart", handleAnimationStart);
+      node.addEventListener("animationend", handleAnimationEnd);
+      return () => {
+        node.removeEventListener("animationstart", handleAnimationStart);
+        node.removeEventListener("animationend", handleAnimationEnd);
+      };
+    }
+  }, [node]);
   return {
-    isPresent: present,
+    isPresent: ["opening", "open", "closing"].includes(isPresent),
     ref: React.useCallback((node: HTMLElement) => {
       if (node) stylesRef.current = getComputedStyle(node);
       setNode(node);
