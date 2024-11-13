@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import { Slot } from "@radix-ui/react-slot";
 import { useMounted } from "@layer-lib/react-use-mounted";
 
-const PortalPrimitive = React.forwardRef((props: React.ComponentPropsWithRef<"div"> & { asChild?: boolean }, forwardedRef: any) => {
+const PortalPrimitive = React.forwardRef<HTMLDivElement, React.ComponentPropsWithRef<"div"> & { asChild?: boolean }>((props, forwardedRef) => {
   const { asChild, ...portalProps } = props;
   const Component = asChild ? Slot : "div";
 

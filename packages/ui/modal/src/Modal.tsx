@@ -3,9 +3,11 @@ import { RemoveScroll } from "react-remove-scroll";
 import { Slot } from "@radix-ui/react-slot";
 
 import { createContext } from "@layer-lib/react-context";
+import { useComposedRef } from "@layer-lib/react-use-composed-ref";
+import { useEscapeKeyDown } from "@layer-lib/react-use-escape-key-down";
+
 import { Portal } from "@layer-ui/portal";
 import { Presence } from "@layer-ui/presence";
-import { useComposedRef } from "@layer-lib/react-use-composed-ref";
 
 interface ModalContextType {
   triggerRef: React.RefObject<HTMLButtonElement>;
@@ -77,6 +79,7 @@ const ModalTrigger = React.forwardRef<HTMLButtonElement, ModalTriggerProps>((pro
 
   return (
     <button
+      type="button"
       aria-haspopup="dialog"
       aria-expanded={context.open}
       aria-controls={context.contentId}
@@ -95,6 +98,7 @@ const ModalContentInner = React.forwardRef<HTMLDivElement, React.ComponentPropsW
   const context = useModalContext();
   const ref = useComposedRef(forwardedRef, context.contentRef);
 
+  useEscapeKeyDown(context.onOpenToggle);
   return (
     <div
       {...contentProps}
