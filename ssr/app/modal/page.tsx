@@ -9,6 +9,7 @@ export default function ModalPage() {
         <ModalOverlay className={overlayStyle} />
         <ModalContent className={modalStyle}>
           <div className={modalContentStyle}>모달 내용</div>
+          <ModalTrigger>CLOSE</ModalTrigger>
         </ModalContent>
       </ModalPortal>
     </Modal>
