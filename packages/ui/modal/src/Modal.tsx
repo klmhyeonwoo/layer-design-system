@@ -70,16 +70,16 @@ Modal.displayName = "Modal";
 
 interface ModalTriggerProps extends React.ComponentPropsWithoutRef<"button"> {}
 
-const ModalTrigger = React.forwardRef<HTMLButtonElement, ModalTriggerProps>((props, forwaredRef) => {
+const ModalTrigger = React.forwardRef<HTMLButtonElement, ModalTriggerProps>((props, forwardedRef) => {
   const { ...triggerProps } = props;
   const context = useModalContext();
-  const triggerRef = useComposedRef(forwaredRef, context.triggerRef);
+  const triggerRef = useComposedRef(forwardedRef, context.triggerRef);
 
   return (
     <button
       aria-haspopup="dialog"
       aria-expanded={context.open}
-      aria-controls={context.triggerId}
+      aria-controls={context.contentId}
       data-state={getState(context.open)}
       onClick={composeEventHandlers(context.onOpenToggle, triggerProps.onClick ?? (() => {}))}
       {...triggerProps}
