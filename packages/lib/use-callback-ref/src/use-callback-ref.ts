@@ -5,7 +5,7 @@ const useCallbackRef = <CallbackType extends (...args: any[]) => any>(callback?:
 
   React.useEffect(() => {
     callbackRef.current = callback;
-  });
+  }, [callback]);
 
   return React.useMemo(() => ((...args) => callbackRef.current?.(...args)) as CallbackType, []);
 };

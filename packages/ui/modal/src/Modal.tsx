@@ -189,6 +189,4 @@ function composeEventHandlers<E>(originalHandler?: (event: E) => void, ...handle
   };
 }
 
-ModalContent.displayName = "ModalContent";
-
 export { Modal, ModalTrigger, ModalContent, ModalPortal, ModalOverlay };
