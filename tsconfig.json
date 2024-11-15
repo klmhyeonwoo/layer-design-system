@@ -40,5 +40,5 @@
       "@layer-ui/presence": ["./packages/ui/presence/src"]
     }
   },
-  "include": ["demo", "packages", "ssr"]
+  "include": ["demo", "packages", "ssr", "setup.ts"]
 }
