@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/button",
+  "name": "@layer-ui/presence",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
@@ -27,12 +27,12 @@
     "clean": "rm -rf dist",
     "version": "pnpm version"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@layer-lib/react-use-composed-ref": "workspace:*"
+  },
   "peerDependencies": {
     "@types/react": "*",
-    "@types/react-dom": "*",
-    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc",
-    "react-dom": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
+    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
   },
   "peerDependenciesMeta": {
     "@types/react": {

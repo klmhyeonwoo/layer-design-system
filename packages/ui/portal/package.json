@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/button",
+  "name": "@layer-ui/portal",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
@@ -27,7 +27,10 @@
     "clean": "rm -rf dist",
     "version": "pnpm version"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
+    "@layer-lib/react-use-mounted": "workspace:*"
+  },
   "peerDependencies": {
     "@types/react": "*",
     "@types/react-dom": "*",

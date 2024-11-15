@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/button",
+  "name": "@layer-lib/react-use-browser-layout-effect",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
@@ -30,9 +30,7 @@
   "dependencies": {},
   "peerDependencies": {
     "@types/react": "*",
-    "@types/react-dom": "*",
-    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc",
-    "react-dom": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
+    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
   },
   "peerDependenciesMeta": {
     "@types/react": {

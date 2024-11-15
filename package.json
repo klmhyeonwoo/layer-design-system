@@ -3,7 +3,6 @@
   "description": "layer design system",
   "private": false,
   "version": "0.0.1",
-  "type": "module",
   "scripts": {
     "build:all": "node build.mjs",
     "lint": "eslint .",
@@ -24,6 +23,7 @@
     "@storybook/addon-onboarding": "^8.4.2",
     "@storybook/addon-storysource": "^8.4.2",
     "@storybook/blocks": "^8.4.2",
+    "@storybook/instrumenter": "^8.4.2",
     "@storybook/manager-api": "^8.4.2",
     "@storybook/react": "^8.4.2",
     "@storybook/react-vite": "^8.4.2",

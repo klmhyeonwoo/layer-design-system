@@ -9,13 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "react-dom": "19.0.0-rc-66855b96-20241106"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "@vanilla-extract/next-plugin": "^2.4.6",
+    "typescript": "^5"
   }
 }

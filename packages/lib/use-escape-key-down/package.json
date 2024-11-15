@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/button",
+  "name": "@layer-ui/react-use-escape-key-down",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
@@ -25,20 +25,17 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "version": "pnpm version"
+    "version": "yarn version"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@layer-lib/react-use-callback-ref": "workspace:*"
+  },
   "peerDependencies": {
     "@types/react": "*",
-    "@types/react-dom": "*",
-    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc",
-    "react-dom": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
+    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
   },
   "peerDependenciesMeta": {
     "@types/react": {
-      "optional": true
-    },
-    "@types/react-dom": {
       "optional": true
     }
   },
