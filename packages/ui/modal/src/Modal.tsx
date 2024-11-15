@@ -20,6 +20,7 @@ interface ModalContextType {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   modal: boolean;
+  trapFocus: boolean;
 }
 
 const [ModalProvider, useModalContext] = createContext<ModalContextType>();
@@ -32,8 +33,9 @@ interface ModalProps extends React.PropsWithChildren {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   modal?: boolean;
+  trapFocus?: boolean;
 }
-const Modal = ({ open: openProp, onOpenChange, children, modal = true }: ModalProps) => {
+const Modal = ({ open: openProp, onOpenChange, children, modal = true, trapFocus = true }: ModalProps) => {
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(!!openProp);
@@ -49,9 +51,9 @@ const Modal = ({ open: openProp, onOpenChange, children, modal = true }: ModalPr
   const handleOpenToggle = React.useCallback(() => {
     handleOpenChange(!open);
   }, [open, handleOpenChange]);
-
   return (
     <ModalProvider
+      trapFocus={trapFocus}
       modal={modal}
       triggerId={React.useId()}
       contentId={React.useId()}
@@ -132,12 +134,8 @@ const ModalContentInner = React.forwardRef<HTMLDivElement, ModalContentProps>((p
     }
   }, [context.open, focusContainer, autoFocus]);
 
-  useEscapeKeyDown(
-    () => {
-      context.onOpenToggle();
-    },
-    focusContainer as unknown as Document,
-  );
+  useEscapeKeyDown(context.onOpenToggle, context.trapFocus ? (focusContainer as unknown as Document) : undefined);
+
   return (
     <div
       {...contentProps}
@@ -174,6 +172,7 @@ interface ModalPortalProps extends React.ComponentPropsWithoutRef<"div"> {}
 
 const ModalPortal = ({ children, ...portalProps }: ModalPortalProps) => {
   const context = useModalContext();
+
   return React.Children.map(children, (child) => (
     <Presence present={context.open}>
       <Portal {...portalProps}>{child}</Portal>
@@ -193,6 +192,7 @@ const ModalOverlayInner = React.forwardRef<HTMLDivElement, ModalOverlayInnerProp
       <div
         {...overlayProps}
         ref={forwardedRef}
+        role="presentation"
         data-state={getState(context.open)}
         style={{ pointerEvents: "auto", ...overlayProps.style }}
         onClick={composeEventHandlers(context.onOpenToggle, overlayProps.onClick ?? (() => {}))}
