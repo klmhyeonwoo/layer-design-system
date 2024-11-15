@@ -70,15 +70,18 @@ const Modal = ({ open: openProp, onOpenChange, children, modal = true }: ModalPr
 
 Modal.displayName = "Modal";
 
-interface ModalTriggerProps extends React.ComponentPropsWithoutRef<"button"> {}
+interface ModalTriggerProps extends React.ComponentPropsWithoutRef<"button"> {
+  asChild?: boolean;
+}
 
 const ModalTrigger = React.forwardRef<HTMLButtonElement, ModalTriggerProps>((props, forwardedRef) => {
-  const { ...triggerProps } = props;
+  const { asChild, ...triggerProps } = props;
   const context = useModalContext();
   const triggerRef = useComposedRef(forwardedRef, context.triggerRef);
+  const Component = asChild ? Slot : "button";
 
   return (
-    <button
+    <Component
       type="button"
       aria-haspopup="dialog"
       aria-expanded={context.open}
@@ -99,23 +102,42 @@ const ModalContentInner = React.forwardRef<HTMLDivElement, ModalContentProps>((p
   const { autoFocus = true, ...contentProps } = props;
   const context = useModalContext();
 
-  const [focusContainer, setFocusContainer] = React.useState<HTMLElement | null>(null);
+  const [focusContainer, setFocusContainer] = React.useState<HTMLElement | null>();
   const previousFocus = React.useRef<HTMLElement | null>(null);
 
   const ref = useComposedRef(forwardedRef, context.contentRef, (node) => setFocusContainer(node));
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key !== "Tab" || !focusContainer) return;
+
+    const [firstFocusable, lastFocusable] = getEdgeTabbable(focusContainer);
+
+    if (event.shiftKey && document.activeElement === firstFocusable) {
+      event.preventDefault();
+      lastFocusable?.focus();
+    } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+      event.preventDefault();
+      firstFocusable?.focus();
+    }
+  };
 
   React.useEffect(() => {
     if (!autoFocus) return;
     if (context.open && focusContainer) {
       previousFocus.current = document.activeElement as HTMLElement;
-      const firstTabbable = getFirstTabbable(focusContainer);
+      const [firstTabbable] = getEdgeTabbable(focusContainer);
       firstTabbable?.focus({ preventScroll: true });
     } else {
       previousFocus.current?.focus();
     }
   }, [context.open, focusContainer, autoFocus]);
 
-  useEscapeKeyDown(context.onOpenToggle);
+  useEscapeKeyDown(
+    () => {
+      context.onOpenToggle();
+    },
+    focusContainer as unknown as Document,
+  );
   return (
     <div
       {...contentProps}
@@ -125,6 +147,7 @@ const ModalContentInner = React.forwardRef<HTMLDivElement, ModalContentProps>((p
       aria-describedby={context.descriptionId}
       aria-labelledby={context.titleId}
       data-state={getState(context.open)}
+      onKeyDown={handleKeyDown}
     />
   );
 });
@@ -210,13 +233,20 @@ function composeEventHandlers<E>(originalHandler?: (event: E) => void, ...handle
   };
 }
 
-function getFirstTabbable(container: HTMLElement) {
+function getEdgeTabbable(container: HTMLElement) {
   const walker = createFocusWalker(container);
+
+  let first: HTMLElement | null = null;
+  let last: HTMLElement | null = null;
+
   while (walker.nextNode()) {
     const currentNode = walker.currentNode as HTMLElement;
-    if (!isHidden(currentNode, { upTo: container })) return currentNode;
+    if (!isHidden(currentNode, { upTo: container })) {
+      if (!first) first = currentNode;
+      last = currentNode;
+    }
   }
-  return null;
+  return [first, last];
 }
 
 /**
