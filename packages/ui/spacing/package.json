@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/portal",
+  "name": "@layer-ui/spacing",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
@@ -22,14 +22,13 @@
     "dist",
     "README.md"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css",
+    "*.css.ts"
+  ],
   "scripts": {
     "clean": "rm -rf dist",
     "version": "pnpm version"
-  },
-  "dependencies": {
-    "@radix-ui/react-slot": "^1.1.0",
-    "@layer-lib/react-use-mounted": "workspace:*"
   },
   "peerDependencies": {
     "@types/react": "*",

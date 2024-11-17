@@ -1,4 +1,4 @@
-import { createVar, style, styleVariants } from "@vanilla-extract/css";
+import { createVar, styleVariants } from "@vanilla-extract/css";
 
 const dynamicSize = createVar();
 

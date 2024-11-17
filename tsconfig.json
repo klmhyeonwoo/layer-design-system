@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "allowJs": false,
-
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
@@ -37,7 +36,8 @@
       "@layer-ui/button": ["./packages/ui/button/src"],
       "@layer-ui/portal": ["./packages/ui/portal/src"],
       "@layer-ui/modal": ["./packages/ui/modal/src"],
-      "@layer-ui/presence": ["./packages/ui/presence/src"]
+      "@layer-ui/presence": ["./packages/ui/presence/src"],
+      "@layer-ui/spacing": ["./packages/ui/spacing/src"]
     }
   },
   "include": ["demo", "packages", "ssr"]
