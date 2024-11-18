@@ -38,7 +38,8 @@
       "@layer-ui/portal": ["./packages/ui/portal/src"],
       "@layer-ui/modal": ["./packages/ui/modal/src"],
       "@layer-ui/presence": ["./packages/ui/presence/src"],
-      "@layer-ui/typography": ["./packages/ui/typography/src"]
+      "@layer-ui/typography": ["./packages/ui/typography/src"],
+      "@layer-ui/tabs": ["./packages/ui/tabs/src"]
     }
   },
   "include": ["demo", "packages", "ssr"]
