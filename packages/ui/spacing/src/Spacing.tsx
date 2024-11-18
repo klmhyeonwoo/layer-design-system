@@ -2,7 +2,7 @@ import { CSSProperties, forwardRef, HTMLAttributes } from "react";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { theme, dynamicSize } from "./computed.css";
 
-interface SpacingProps extends Omit<HTMLAttributes<HTMLDivElement>, "types"> {
+interface SpacingProps extends Omit<HTMLAttributes<HTMLDivElement>, "children" | "types"> {
   size: number;
   direction?: "vertical" | "horizontal";
 }
