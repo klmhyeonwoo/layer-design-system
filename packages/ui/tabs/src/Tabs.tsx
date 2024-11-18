@@ -1,5 +1,5 @@
 import { createContext } from "@layer-lib/react-context";
-import { useState } from "react";
+import { HTMLAttributes, useState } from "react";
 
 interface TabsContextType {
   defaultValue: string;
@@ -27,38 +27,38 @@ const Tabs = ({ defaultValue, onValueChange, children }: TabsProps) => {
   );
 };
 
-interface TabsListProps extends React.PropsWithChildren {}
+interface TabsListProps extends HTMLAttributes<HTMLDivElement> {}
 
-const TabsList = ({ children }: TabsListProps) => {
-  return <div>{children}</div>;
+const TabsList = ({ children, ...props }: TabsListProps) => {
+  return <div {...props}>{children}</div>;
 };
 
-interface TabsTriggerProps extends React.PropsWithChildren {
+interface TabsTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   value: string;
 }
 
-const TabsTrigger = ({ value, children }: TabsTriggerProps) => {
+const TabsTrigger = ({ value, children, ...props }: TabsTriggerProps) => {
   const context = useTabsContext();
 
   const isSelected = context.value === value;
   return (
-    <button role="tab" data-state={isSelected ? "active" : "inactive"} onClick={() => context.onValueChange(value)}>
+    <button role="tab" data-state={isSelected ? "active" : "inactive"} onClick={() => context.onValueChange(value)} {...props}>
       {children}
     </button>
   );
 };
 
-interface TabsContentProps extends React.PropsWithChildren {
+interface TabsContentProps extends HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
-const TabsContent = ({ value, children }: TabsContentProps) => {
+const TabsContent = ({ value, children, ...props }: TabsContentProps) => {
   const context = useTabsContext();
   if (context.value !== value) {
     return;
   }
 
-  return <div>{children}</div>;
+  return <div {...props}>{children}</div>;
 };
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };

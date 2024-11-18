@@ -1,13 +1,16 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), vanillaExtractPlugin()],
   resolve: {
     alias: {
-      "@layer-ui": path.resolve(__dirname, "../packages/ui"),
+      "@layer-ui/button": path.resolve(__dirname, "../packages/ui/Button/src"),
+      "@layer-ui/tabs": path.resolve(__dirname, "../packages/ui/Tabs/src"),
+      "@layer-lib/react-context": path.resolve(__dirname, "../packages/lib/react-context/src"),
     },
   },
   build: {
