@@ -30,7 +30,11 @@ const Tabs = ({ defaultValue, onValueChange, children }: TabsProps) => {
 interface TabsListProps extends HTMLAttributes<HTMLDivElement> {}
 
 const TabsList = ({ children, ...props }: TabsListProps) => {
-  return <div {...props}>{children}</div>;
+  return (
+    <div aria-label="tabs-navigation" {...props}>
+      {children}
+    </div>
+  );
 };
 
 interface TabsTriggerProps extends HTMLAttributes<HTMLButtonElement> {
@@ -39,10 +43,23 @@ interface TabsTriggerProps extends HTMLAttributes<HTMLButtonElement> {
 
 const TabsTrigger = ({ value, children, ...props }: TabsTriggerProps) => {
   const context = useTabsContext();
-
   const isSelected = context.value === value;
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      context.onValueChange?.(value);
+    }
+  };
   return (
-    <button role="tab" data-state={isSelected ? "active" : "inactive"} onClick={() => context.onValueChange(value)} {...props}>
+    <button
+      role="tab"
+      aria-controls={value}
+      aria-selected={context.value === value}
+      data-state={isSelected ? "active" : "inactive"}
+      onClick={() => context.onValueChange(value)}
+      onKeyDown={handleKeyDown}
+      {...props}
+    >
       {children}
     </button>
   );
@@ -54,11 +71,13 @@ interface TabsContentProps extends HTMLAttributes<HTMLDivElement> {
 
 const TabsContent = ({ value, children, ...props }: TabsContentProps) => {
   const context = useTabsContext();
-  if (context.value !== value) {
-    return;
-  }
+  const isSelected = context.value === value;
 
-  return <div {...props}>{children}</div>;
+  return (
+    <div aria-labelledby={`panel-${value}`} hidden={!isSelected} {...props}>
+      {children}
+    </div>
+  );
 };
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
