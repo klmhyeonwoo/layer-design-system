@@ -27,13 +27,14 @@ export const modalStyle = style([
     margin: "auto",
     width: "100%",
     height: "fit-content",
-    maxWidth: "46rem",
-    maxHeight: "46rem",
+    maxWidth: "min(46rem, calc(100% - 2rem))",
+    maxHeight: "min(46rem, calc(100vh - 4rem))",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     transition: "0.4s all",
-    padding: "2rem",
+    padding: "clamp(1rem, 5vw, 2rem)",
+    overflowY: "auto",
   },
 ]);
 

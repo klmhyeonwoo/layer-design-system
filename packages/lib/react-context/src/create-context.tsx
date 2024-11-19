@@ -14,7 +14,7 @@ function createContext<ContextType extends object | null>(defaultValue?: Context
     const context = React.useContext(Context);
     if (context) return context;
     if (defaultValue) return defaultValue;
-    throw new Error("useContext must be inside a Provider with a value");
+    throw new Error(`Context 값을 찾을 수 없습니다. useContext는 반드시 해당하는 Provider 내부에서 사용되어야 합니다.`);
   }
 
   return [Provider, useContext] as const;
