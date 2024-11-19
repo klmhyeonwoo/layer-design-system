@@ -2,8 +2,6 @@ import { globSync } from "glob";
 import * as vite from "vite";
 import * as tsup from "tsup";
 import dts from "vite-plugin-dts";
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
-import  { libInjectCss }  from  'vite-plugin-lib-inject-css' ;
 
 async function build(path) {
   const file = `${path}/src/index.ts`;
@@ -29,8 +27,6 @@ async function build(path) {
         entryRoot: file,
         outDir: dist,
       }),
-      libInjectCss(),
-      vanillaExtractPlugin()
     ],
   };
 

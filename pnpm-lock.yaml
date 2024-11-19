@@ -196,6 +196,15 @@ importers:
         specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
         version: 18.3.1
 
+  packages/lib/use-spacing:
+    dependencies:
+      '@types/react':
+        specifier: '*'
+        version: 18.3.12
+      react:
+        specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+        version: 18.3.1
+
   packages/ui/button:
     dependencies:
       '@types/react':
@@ -270,21 +279,6 @@ importers:
       react:
         specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
         version: 18.3.1
-
-  packages/ui/spacing:
-    dependencies:
-      '@types/react':
-        specifier: '*'
-        version: 18.3.12
-      '@types/react-dom':
-        specifier: '*'
-        version: 18.3.1
-      react:
-        specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
-        version: 18.3.1
-      react-dom:
-        specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
-        version: 18.3.1(react@18.3.1)
 
   ssr:
     dependencies:

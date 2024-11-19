@@ -31,13 +31,13 @@
       "@layer-lib/react-context": ["./packages/lib/react-context/src"],
       "@layer-lib/react-use-composed-ref": ["./packages/lib/use-composed-ref/src"],
       "@layer-lib/react-use-browser-layout-effect": ["./packages/lib/use-browser-layout-effect/src"],
+      "@layer-lib/use-spacing": ["./packages/lib/use-spacing/src"],
 
       // ui
       "@layer-ui/button": ["./packages/ui/button/src"],
       "@layer-ui/portal": ["./packages/ui/portal/src"],
       "@layer-ui/modal": ["./packages/ui/modal/src"],
       "@layer-ui/presence": ["./packages/ui/presence/src"],
-      "@layer-ui/spacing": ["./packages/ui/spacing/src"]
     }
   },
   "include": ["demo", "packages", "ssr"]

@@ -1,14 +1,16 @@
-import { Spacing } from "@layer-ui/spacing";
 import { Button } from "@layer-ui/button";
+import { useSpacing } from "@layer-lib/use-spacing";
 
 function App() {
+  const spacing = useSpacing({ size: 10, direction: "vertical" });
+
   return (
     <div>
       <Button>Click me</Button>
       <div>
         <h1>Title Above</h1>
-        <Spacing size={40} title={"test"} style={{ border: "solid" }} />
-        <p>This content is vertically spaced by 2rem.</p>
+        <div style={{ ...spacing }}> This is 10px Spacing </div>
+        <p>This content is vertically spaced.</p>
       </div>
     </div>
   );
