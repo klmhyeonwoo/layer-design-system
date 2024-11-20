@@ -1,3 +1,4 @@
+import { composeEventHandlers } from "@layer-core/primitive";
 import { createContext } from "@layer-lib/react-context";
 import { HTMLAttributes, useState } from "react";
 
@@ -27,7 +28,7 @@ const Tabs = ({ defaultValue, onValueChange, children }: TabsProps) => {
   );
 };
 
-interface TabsListProps extends HTMLAttributes<HTMLDivElement> {}
+type TabsListProps = HTMLAttributes<HTMLDivElement>;
 
 const TabsList = ({ children, ...props }: TabsListProps) => {
   return (
@@ -57,7 +58,7 @@ const TabsTrigger = ({ value, children, ...props }: TabsTriggerProps) => {
       aria-selected={context.value === value}
       data-state={isSelected ? "active" : "inactive"}
       onClick={() => context.onValueChange(value)}
-      onKeyDown={handleKeyDown}
+      onKeyDown={composeEventHandlers(handleKeyDown, props.onKeyDown ?? (() => {}))}
       {...props}
     >
       {children}
