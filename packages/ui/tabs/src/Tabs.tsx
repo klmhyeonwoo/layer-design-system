@@ -45,8 +45,9 @@ const TabsTrigger = ({ value, children, ...props }: TabsTriggerProps) => {
 
   return (
     <button
+      id={`tab-${value}`}
       role="tab"
-      aria-controls={value}
+      aria-controls={`tabpanel-${value}`}
       aria-selected={context.value === value}
       data-state={isSelected ? "active" : "inactive"}
       onClick={composeEventHandlers(props.onClick, () => context.onValueChange(value))}
@@ -72,7 +73,7 @@ const TabsContent = ({ value, children, ...props }: TabsContentProps) => {
   const isSelected = context.value === value;
 
   return (
-    <div role="tabpanel" aria-labelledby={`panel-${value}`} hidden={!isSelected} {...props}>
+    <div id={`tabpanel-${value}`} role="tabpanel" aria-labelledby={`tab-${value}`} hidden={!isSelected} {...props}>
       {children}
     </div>
   );
