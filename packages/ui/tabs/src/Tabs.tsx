@@ -3,14 +3,18 @@ import { createContext } from "@layer-lib/react-context";
 import { HTMLAttributes, useState } from "react";
 
 interface TabsContextType {
-  defaultValue: string;
   value?: string;
+  defaultValue?: string;
   onValueChange: (val: string) => void;
 }
 
 const [TabsProvider, useTabsContext] = createContext<TabsContextType>();
 
-interface TabsProps extends React.PropsWithChildren, TabsContextType {}
+interface TabsProps extends React.PropsWithChildren {
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+}
 
 const Tabs = ({ defaultValue, onValueChange, children }: TabsProps) => {
   const [value, setValue] = useState(defaultValue);
@@ -19,7 +23,7 @@ const Tabs = ({ defaultValue, onValueChange, children }: TabsProps) => {
       defaultValue={defaultValue}
       value={value}
       onValueChange={(value: string) => {
-        onValueChange(value);
+        onValueChange?.(value);
         setValue(value);
       }}
     >
@@ -48,7 +52,7 @@ const TabsTrigger = ({ value, children, ...props }: TabsTriggerProps) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      context.onValueChange?.(value);
+      context.onValueChange(value);
     }
   };
   return (
