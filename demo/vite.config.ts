@@ -11,6 +11,7 @@ export default defineConfig({
       "@layer-ui/button": path.resolve(__dirname, "../packages/ui/button/src"),
       "@layer-ui/tabs": path.resolve(__dirname, "../packages/ui/tabs/src"),
       "@layer-lib/react-context": path.resolve(__dirname, "../packages/lib/react-context/src"),
+      "@layer-core/primitive": path.resolve(__dirname, "../packages/core/primitive/src"),
     },
   },
   build: {

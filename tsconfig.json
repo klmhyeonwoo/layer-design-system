@@ -42,7 +42,7 @@
       "@layer-ui/tabs": ["./packages/ui/tabs/src"],
 
       // core
-      "@layer-core/primitive": ["packages/core/primitive/src"]
+      "@layer-core/primitive": ["./packages/core/primitive/src"]
     }
   },
   "include": ["demo", "packages", "ssr"]
