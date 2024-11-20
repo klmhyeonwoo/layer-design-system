@@ -36,7 +36,7 @@ type TabsListProps = HTMLAttributes<HTMLDivElement>;
 
 const TabsList = ({ children, ...props }: TabsListProps) => {
   return (
-    <div aria-label="tabs-navigation" {...props}>
+    <div role="tablist" aria-label="tabs-navigation" {...props}>
       {children}
     </div>
   );
@@ -79,7 +79,7 @@ const TabsContent = ({ value, children, ...props }: TabsContentProps) => {
   const isSelected = context.value === value;
 
   return (
-    <div aria-labelledby={`panel-${value}`} hidden={!isSelected} {...props}>
+    <div role="tabpanel" aria-labelledby={`panel-${value}`} hidden={!isSelected} {...props}>
       {children}
     </div>
   );
