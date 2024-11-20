@@ -19,14 +19,7 @@ interface TabsProps extends React.PropsWithChildren {
 const Tabs = ({ defaultValue, onValueChange, children }: TabsProps) => {
   const [value, setValue] = useState(defaultValue);
   return (
-    <TabsProvider
-      defaultValue={defaultValue}
-      value={value}
-      onValueChange={(value: string) => {
-        onValueChange?.(value);
-        setValue(value);
-      }}
-    >
+    <TabsProvider defaultValue={defaultValue} value={value} onValueChange={composeEventHandlers(onValueChange, setValue)}>
       {children}
     </TabsProvider>
   );
@@ -49,20 +42,20 @@ interface TabsTriggerProps extends HTMLAttributes<HTMLButtonElement> {
 const TabsTrigger = ({ value, children, ...props }: TabsTriggerProps) => {
   const context = useTabsContext();
   const isSelected = context.value === value;
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      context.onValueChange(value);
-    }
-  };
+
   return (
     <button
       role="tab"
       aria-controls={value}
       aria-selected={context.value === value}
       data-state={isSelected ? "active" : "inactive"}
-      onClick={() => context.onValueChange(value)}
-      onKeyDown={composeEventHandlers(handleKeyDown, props.onKeyDown ?? (() => {}))}
+      onClick={composeEventHandlers(props.onClick, () => context.onValueChange(value))}
+      onKeyDown={composeEventHandlers(props.onKeyDown, (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          context.onValueChange(value);
+        }
+      })}
       {...props}
     >
       {children}
