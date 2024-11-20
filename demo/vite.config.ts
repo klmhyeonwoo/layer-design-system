@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@layer-ui": path.resolve(__dirname, "../packages/ui"),
+      "@layer-lib": path.resolve(__dirname, "../packages/lib"),
     },
   },
   build: {
