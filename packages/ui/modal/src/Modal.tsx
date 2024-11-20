@@ -102,7 +102,7 @@ interface ModalContentProps extends React.ComponentPropsWithoutRef<"div"> {}
 
 const ModalContentInner = React.forwardRef<HTMLDivElement, ModalContentProps>((props, forwardedRef) => {
   const { autoFocus = true, ...contentProps } = props;
-  const context = useModalContext("ModalContent");
+  const context = useModalContext("ModalContentInner");
 
   const [focusContainer, setFocusContainer] = React.useState<HTMLElement | null>();
   const previousFocus = React.useRef<HTMLElement | null>(null);
