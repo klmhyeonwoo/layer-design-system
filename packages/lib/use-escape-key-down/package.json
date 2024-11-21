@@ -1,5 +1,5 @@
 {
-  "name": "@layer-ui/react-use-escape-key-down",
+  "name": "@layer-lib/react-use-escape-key-down",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function createContext<ContextType extends object | null>(defaultValue?: ContextType) {
+function createContext<ContextType extends object | null>(contextName: string, defaultValue?: ContextType) {
   const Context = React.createContext<ContextType | undefined>(defaultValue);
 
   function Provider(props: ContextType & { children: React.ReactNode }) {
@@ -10,11 +10,13 @@ function createContext<ContextType extends object | null>(defaultValue?: Context
     return <Context.Provider value={values}> {children} </Context.Provider>;
   }
 
-  function useContext() {
+  function useContext(componentName: string) {
     const context = React.useContext(Context);
     if (context) return context;
     if (defaultValue) return defaultValue;
-    throw new Error(`Context 값을 찾을 수 없습니다. useContext는 반드시 해당하는 Provider 내부에서 사용되어야 합니다.`);
+    throw new Error(
+      `${contextName}Context 값을 찾을 수 없습니다. <${componentName} />에서 사용된 ${contextName}context는 반드시 해당하는 ${contextName}Provider 내부에서 사용되어야 합니다.`,
+    );
   }
 
   return [Provider, useContext] as const;

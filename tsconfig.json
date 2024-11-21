@@ -47,5 +47,5 @@
       "@layer-core/primitive": ["./packages/core/primitive/src"]
     }
   },
-  "include": ["demo", "packages", "ssr"]
+  "include": ["demo", "packages", "ssr", "setup.ts"]
 }
