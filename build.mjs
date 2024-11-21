@@ -38,7 +38,7 @@ async function build(path) {
     dts: { only: true },
     outDir: dist,
     silent: true,
-    external: [/@layer-lib\/.+/, /@layer-ui\/.+/, /@layer-core\/.+/],
+    external: [/@layer-lib\/.+/, /@layer-ui\/.+/, /@layer-core\/.+/, /@layer-utils\/.+/],
   });
 
   console.log(`Built ${path}/dist with Vite`);

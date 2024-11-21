@@ -7,7 +7,7 @@ export default defineConfig({
     target: "es2022",
     minify: "terser",
     rollupOptions: {
-      external: [/@layer-lib\/.+/, /@layer-ui\/.+/, /@layer-core\/.+/],
+      external: [/@layer-lib\/.+/, /@layer-ui\/.+/, /@layer-core\/.+/, /@layer-utils\/.+/],
       treeshake: true,
     },
   },

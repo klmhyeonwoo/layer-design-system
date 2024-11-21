@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "allowJs": false,
-
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
@@ -41,6 +40,9 @@
       "@layer-ui/typography": ["./packages/ui/typography/src"],
       "@layer-ui/tabs": ["./packages/ui/tabs/src"],
 
+      // utils
+      "@layer-utils/getSpacingStyle": ["./packages/utils/getSpacingStyle/src"],
+        
       // core
       "@layer-core/primitive": ["./packages/core/primitive/src"]
     }
