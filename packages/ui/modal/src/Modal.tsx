@@ -25,7 +25,7 @@ interface ModalContextType {
   trapFocus: boolean;
 }
 
-const [ModalProvider, useModalContext] = createContext<ModalContextType>();
+const [ModalProvider, useModalContext] = createContext<ModalContextType>("Modal");
 
 const getState = (open: boolean) => {
   return open ? "open" : "closed";
@@ -80,7 +80,7 @@ interface ModalTriggerProps extends React.ComponentPropsWithoutRef<"button"> {
 
 const ModalTrigger = React.forwardRef<HTMLButtonElement, ModalTriggerProps>((props, forwardedRef) => {
   const { asChild, ...triggerProps } = props;
-  const context = useModalContext();
+  const context = useModalContext("ModalTrigger");
   const triggerRef = useComposedRef(forwardedRef, context.triggerRef);
   const Component = asChild ? Slot : "button";
 
@@ -104,7 +104,7 @@ interface ModalContentProps extends React.ComponentPropsWithoutRef<"div"> {}
 
 const ModalContentInner = React.forwardRef<HTMLDivElement, ModalContentProps>((props, forwardedRef) => {
   const { autoFocus = true, ...contentProps } = props;
-  const context = useModalContext();
+  const context = useModalContext("ModalContentInner");
 
   const [focusContainer, setFocusContainer] = React.useState<HTMLElement | null>();
   const previousFocus = React.useRef<HTMLElement | null>(null);
@@ -155,7 +155,7 @@ const ModalContentInner = React.forwardRef<HTMLDivElement, ModalContentProps>((p
 ModalContentInner.displayName = "ModalContentInner";
 
 const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(({ ...contentProps }, forwardedRef) => {
-  const context = useModalContext();
+  const context = useModalContext("ModalContent");
 
   return context.modal ? (
     <ModalPortal>
@@ -173,7 +173,7 @@ ModalContent.displayName = "ModalContent";
 interface ModalPortalProps extends React.ComponentPropsWithoutRef<"div"> {}
 
 const ModalPortal = ({ children, ...portalProps }: ModalPortalProps) => {
-  const context = useModalContext();
+  const context = useModalContext("ModalPortal");
 
   return React.Children.map(children, (child) => (
     <Presence present={context.open}>
@@ -187,7 +187,7 @@ ModalPortal.displayName = "ModalPortal";
 interface ModalOverlayInnerProps extends React.ComponentPropsWithoutRef<"div"> {}
 
 const ModalOverlayInner = React.forwardRef<HTMLDivElement, ModalOverlayInnerProps>(({ ...overlayProps }, forwardedRef) => {
-  const context = useModalContext();
+  const context = useModalContext("ModalOverlayInner");
 
   return (
     <RemoveScroll as={Slot} allowPinchZoom shards={[context.contentRef]}>
@@ -208,7 +208,7 @@ ModalOverlayInner.displayName = "ModalOverlayInner";
 interface ModalOverlayProps extends React.ComponentPropsWithoutRef<"div"> {}
 
 const ModalOverlay = React.forwardRef<HTMLDivElement, ModalOverlayProps>(({ ...overlayProps }, forwardedRef) => {
-  const context = useModalContext();
+  const context = useModalContext("ModalOverlay");
   return context.modal ? (
     <Presence present={context.open}>
       <ModalOverlayInner {...overlayProps} ref={forwardedRef} />

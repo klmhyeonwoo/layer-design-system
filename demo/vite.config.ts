@@ -8,6 +8,8 @@ export default defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
   resolve: {
     alias: {
+      "@layer-ui": path.resolve(__dirname, "../packages/ui"),
+      "@layer-lib": path.resolve(__dirname, "../packages/lib"),
       "@layer-ui/button": path.resolve(__dirname, "../packages/ui/button/src"),
       "@layer-ui/tabs": path.resolve(__dirname, "../packages/ui/tabs/src"),
       "@layer-lib/react-context": path.resolve(__dirname, "../packages/lib/react-context/src"),
