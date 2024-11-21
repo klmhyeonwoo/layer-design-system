@@ -9,6 +9,8 @@ import { useEscapeKeyDown } from "@layer-lib/react-use-escape-key-down";
 import { Portal } from "@layer-ui/portal";
 import { Presence } from "@layer-ui/presence";
 
+import { composeEventHandlers } from "@layer-core/primitive";
+
 interface ModalContextType {
   triggerRef: React.RefObject<HTMLButtonElement>;
   contentRef: React.RefObject<HTMLDivElement>;
@@ -215,23 +217,6 @@ const ModalOverlay = React.forwardRef<HTMLDivElement, ModalOverlayProps>(({ ...o
 });
 
 ModalOverlay.displayName = "ModalOverlay";
-
-/**
- * @TODO 이벤트 핸들러 컴포지션 함수 분리
- * @param originalHandler
- * @param handlers
- * @returns
- */
-function composeEventHandlers<E>(originalHandler?: (event: E) => void, ...handlers: ((event: E) => void)[]) {
-  return function handleEvent(event: E) {
-    originalHandler?.(event);
-    handlers?.forEach((handler) => {
-      if (!(event as unknown as Event).defaultPrevented) {
-        return handler?.(event);
-      }
-    });
-  };
-}
 
 function getEdgeTabbable(container: HTMLElement) {
   const walker = createFocusWalker(container);
