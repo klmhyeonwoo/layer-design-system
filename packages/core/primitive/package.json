@@ -1,0 +1,37 @@
+{
+  "name": "@layer-core/primitive",
+  "version": "0.0.1",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "source": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rm -rf dist",
+    "version": "pnpm version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klmhyeonwoo/layer-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/klmhyeonwoo/layer-design-system/issues"
+  }
+}
