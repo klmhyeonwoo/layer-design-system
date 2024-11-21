@@ -25,7 +25,7 @@ const directionStyles = {
 } as const;
 
 /**
- * @description useSpacing is a library that makes the user's spacing style more efficient.
+ * @description getSpacingStyle is a library that makes the user's spacing style more efficient.
  * @param { Object } options
  * @param { number | "small" | "medium" | "large" } options.size
  * @param { "all" | "horizontal" | "vertical" | "top" | "bottom" | "left" | "right" } options.direction
@@ -35,6 +35,11 @@ const directionStyles = {
 export const getSpacingStyle = ({ size, direction, unit = "px" }: SpacingOptions): Record<string, string | number> => {
   const spacingValue = typeof size === "number" ? size : sizeMap[size];
   const valueWithUnit = `${spacingValue}${unit}`;
+  const styles: Record<string, string | number> = {};
 
-  return directionStyles[direction].reduce((acc, cur) => ({ ...acc, [cur]: valueWithUnit }), {});
+  directionStyles[direction].forEach((cur) => {
+    styles[cur] = valueWithUnit;
+  });
+
+  return styles;
 };
