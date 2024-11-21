@@ -1,5 +1,5 @@
 {
-  "name": "@layer-lib/use-spacing",
+  "name": "@layer-utils/getSpacingStyle",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {

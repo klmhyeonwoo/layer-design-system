@@ -1,0 +1,1 @@
+export { getSpacingStyle } from "./getSpacingStyle";
