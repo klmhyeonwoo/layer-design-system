@@ -24,6 +24,10 @@ export default defineConfig({
         find: /@layer-themes\/(.*)/,
         replacement: path.resolve(__dirname, "../packages/themes") + "/$1/src/index.ts",
       },
+      {
+        find: /@layer-utils\/(.*)/,
+        replacement: path.resolve(__dirname, "../packages/utils") + "/$1/src/index.ts",
+      },
     ],
   },
   build: {
