@@ -41,9 +41,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/klmhyeonwoo/layer-design-system.git"
+    "url": "git+https://github.com/Iayerapp/layer-design-system.git"
   },
   "bugs": {
-    "url": "https://github.com/klmhyeonwoo/layer-design-system/issues"
+    "url": "https://github.com/Iayerapp/layer-design-system/issues"
   }
 }
