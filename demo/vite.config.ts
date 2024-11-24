@@ -7,15 +7,28 @@ import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 export default defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
   resolve: {
-    alias: {
-      "@layer-ui": path.resolve(__dirname, "../packages/ui"),
-      "@layer-lib": path.resolve(__dirname, "../packages/lib"),
-      "@layer-utils": path.resolve(__dirname, "../packages/utils"),
-      "@layer-ui/button": path.resolve(__dirname, "../packages/ui/button/src"),
-      "@layer-ui/tabs": path.resolve(__dirname, "../packages/ui/tabs/src"),
-      "@layer-lib/react-context": path.resolve(__dirname, "../packages/lib/react-context/src"),
-      "@layer-core/primitive": path.resolve(__dirname, "../packages/core/primitive/src"),
-    },
+    alias: [
+      {
+        find: /@layer-ui\/(.*)/,
+        replacement: path.resolve(__dirname, "../packages/ui") + "/$1/src/index.ts",
+      },
+      {
+        find: /@layer-core\/(.*)/,
+        replacement: path.resolve(__dirname, "../packages/core") + "/$1/src/index.ts",
+      },
+      {
+        find: /@layer-lib\/(.*)/,
+        replacement: path.resolve(__dirname, "../packages/lib") + "/$1/src/index.ts",
+      },
+      {
+        find: /@layer-themes\/(.*)/,
+        replacement: path.resolve(__dirname, "../packages/themes") + "/$1/src/index.ts",
+      },
+      {
+        find: /@layer-utils\/(.*)/,
+        replacement: path.resolve(__dirname, "../packages/utils") + "/$1/src/index.ts",
+      },
+    ],
   },
   build: {
     sourcemap: true,

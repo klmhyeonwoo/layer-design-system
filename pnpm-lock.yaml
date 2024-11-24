@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@layer/lib':
-        specifier: file:layer-lib-0.0.1.tgz
-        version: file:layer-lib-0.0.1.tgz
       '@vanilla-extract/css':
         specifier: ^1.16.0
         version: 1.16.0
@@ -151,6 +148,8 @@ importers:
         specifier: ^2.1.5
         version: 2.1.5(@types/node@22.9.0)(happy-dom@15.11.6)(terser@5.36.0)
 
+  packages/core/primitive: {}
+
   packages/lib/react-context:
     dependencies:
       '@types/react':
@@ -243,9 +242,6 @@ importers:
       '@layer-ui/presence':
         specifier: workspace:*
         version: link:../presence
-      '@layer-ui/react-use-escape-key-down':
-        specifier: workspace:*
-        version: link:../../lib/use-escape-key-down
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.12)(react@19.0.0-rc-66855b96-20241106)
@@ -306,6 +302,36 @@ importers:
       react-dom:
         specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
         version: 18.3.1(react@18.3.1)
+
+  packages/ui/typography:
+    dependencies:
+      '@layer-lib/react-use-mounted':
+        specifier: workspace:*
+        version: link:../../lib/use-mounted
+      '@radix-ui/react-slot':
+        specifier: ^1.1.0
+        version: 1.1.0(@types/react@18.3.12)(react@18.3.1)
+      '@types/react':
+        specifier: '*'
+        version: 18.3.12
+      '@types/react-dom':
+        specifier: '*'
+        version: 18.3.1
+      react:
+        specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+        version: 18.3.1
+      react-dom:
+        specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+        version: 18.3.1(react@18.3.1)
+
+  packages/utils/getSpacingStyle:
+    dependencies:
+      '@types/react':
+        specifier: '*'
+        version: 18.3.12
+      react:
+        specifier: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+        version: 18.3.1
 
   ssr:
     dependencies:
@@ -931,10 +957,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
-
-  '@layer/lib@file:layer-lib-0.0.1.tgz':
-    resolution: {integrity: sha512-S8XHORmlNR2gSGbdWCyuyORB/rdZzlJoVlsrwLko+Awyis1zkIZmO8+J34NmhTL6ov4eHAaaUYKx20t1sftw5A==, tarball: file:layer-lib-0.0.1.tgz}
-    version: 0.0.1
 
   '@mdx-js/react@3.1.0':
     resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
@@ -4343,11 +4365,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
-
-  '@layer/lib@file:layer-lib-0.0.1.tgz':
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   '@mdx-js/react@3.1.0(@types/react@18.3.12)(react@18.3.1)':
     dependencies:
